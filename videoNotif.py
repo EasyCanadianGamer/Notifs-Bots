@@ -2,8 +2,8 @@ import os
 import requests
 import tweepy
 from atproto import Client
-from dotenv import load_dotenv
-load_dotenv()  
+# from dotenv import load_dotenv
+# load_dotenv()  
 
 
 

@@ -1,7 +1,7 @@
 import os
 import requests
-from dotenv import load_dotenv
-load_dotenv()  
+# from dotenv import load_dotenv
+# load_dotenv()  
 
 
 message = """<@&824043811718168576> 🎮 Canadian Gamer is LIVE!
