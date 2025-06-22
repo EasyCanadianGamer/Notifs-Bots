@@ -1,0 +1,46 @@
+name: Notify Video
+
+on:
+  workflow_dispatch:
+    inputs:
+      youtube_link:
+        description: 'YouTube video link'
+        required: true
+      youtube_title:
+        description: 'YouTube video title'
+        required: true
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run the Discord video notification script
+      run: python vidoeDiscord.py
+      env:
+        YOUTUBE_LINK: ${{ github.event.inputs.youtube_link }}
+        YOUTUBE_TITLE: ${{ github.event.inputs.youtube_title }}
+        VIDEO_DISCORD_WEBHOOK_URL: ${{ secrets.VIDEO_DISCORD_WEBHOOK_URL }}
+
+    - name: Run the X and Bluesky video notification script
+      run: python videoNotif.py
+      env:
+        YOUTUBE_LINK: ${{ github.event.inputs.youtube_link }}
+        YOUTUBE_TITLE: ${{ github.event.inputs.youtube_title }}
+        TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+        TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
+        TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+        TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
+        BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
+        BLUESKY_PASSWORD: ${{ secrets.BLUESKY_PASSWORD }}
