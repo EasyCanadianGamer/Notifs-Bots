@@ -29,7 +29,7 @@ def post_to_twitter():
     #     os.getenv("TWITTER_ACCESS_TOKEN"),
     #     os.getenv("TWITTER_ACCESS_SECRET")
     # )
-    response = client.create_tweet(text=message)
+    response = client.create_tweet(text=message + "#gaming #YouTube #CG23")
     print(f"✅ Posted to Twitter: https://twitter.com/user/status/{response.data['id']}")
 
 # Post to Bluesky
@@ -37,7 +37,7 @@ def post_to_bluesky():
     message = create_message()
     client = Client()
     client.login(os.getenv("BLUESKY_HANDLE"), os.getenv("BLUESKY_PASSWORD"))
-    client.send_post(text=message)
+    client.send_post(text=message + "#gaming #YouTube #CG_BLUSKY")
     print("✅ Posted to Bluesky")
 
 if __name__ == "__main__":

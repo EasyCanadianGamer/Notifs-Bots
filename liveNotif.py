@@ -5,14 +5,16 @@ from atproto import Client
 # from dotenv import load_dotenv
 # load_dotenv()  
 
-message = """🎮 Canadian Gamer is LIVE!
-
-📺 Twitch: https://twitch.tv/canadian_gamer23
-📺 YouTube: https://youtube.com/@CanadianGamer23/streams
-"""
 
 # Post to Twitter
 def post_to_twitter():
+    message = """🎮 Canadian Gamer is LIVE!
+
+📺 Twitch: https://twitch.tv/canadian_gamer23
+📺 YouTube: https://youtube.com/@CanadianGamer23/streams
+#gaming #livestream #Twitch #YouTube #CG23
+"""
+
     client = tweepy.Client(
     consumer_key=os.getenv("TWITTER_API_KEY"),
     consumer_secret=os.getenv("TWITTER_API_SECRET"),
@@ -31,6 +33,12 @@ def post_to_twitter():
 
 # Post to Bluesky
 def post_to_bluesky():
+    message = """🎮 Canadian Gamer is LIVE!
+
+📺 Twitch: https://twitch.tv/canadian_gamer23
+📺 YouTube: https://youtube.com/@CanadianGamer23/streams
+#gaming #livestream #Twitch #YouTube #CG_BLUSKY
+"""
     client = Client()
     client.login(os.getenv("BLUESKY_HANDLE"), os.getenv("BLUESKY_PASSWORD"))
     client.send_post(text=message)
