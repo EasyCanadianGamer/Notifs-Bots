@@ -6,14 +6,35 @@ from atproto import Client
 # load_dotenv()  
 
 
+
+def create_tweet_message():
+    yt_link = os.getenv("YOUTUBE_LINK")
+    title = os.getenv("TITLE")
+    message = f"""🎮 Canadian Gamer is LIVE! Playing {title}
+
+    📺 Twitch: https://twitch.tv/canadian_gamer23
+    📺 YouTube:{yt_link}
+    #gaming #livestream #Twitch #YouTube #CG23
+    """
+
+    return message
+
+
+def create_message():
+    yt_link = os.getenv("YOUTUBE_LINK")
+    title = os.getenv("TITLE")
+    message = f"""🎮 Canadian Gamer is LIVE! Playing {title}
+
+    📺 Twitch: https://twitch.tv/canadian_gamer23
+    📺 YouTube:{yt_link}
+    #gaming #livestream #Twitch #YouTube #CG_BLUSKY
+    """
+
+    return message
+
 # Post to Twitter
 def post_to_twitter():
-    message = """🎮 Canadian Gamer is LIVE!
-
-📺 Twitch: https://twitch.tv/canadian_gamer23
-📺 YouTube: https://youtube.com/@CanadianGamer23/streams
-#gaming #livestream #Twitch #YouTube #CG23
-"""
+    message = create_tweet_message()
 
     client = tweepy.Client(
     consumer_key=os.getenv("TWITTER_API_KEY"),
@@ -33,12 +54,7 @@ def post_to_twitter():
 
 # Post to Bluesky
 def post_to_bluesky():
-    message = """🎮 Canadian Gamer is LIVE!
-
-📺 Twitch: https://twitch.tv/canadian_gamer23
-📺 YouTube: https://youtube.com/@CanadianGamer23/streams
-#gaming #livestream #Twitch #YouTube #CG_BLUSKY
-"""
+    message = create_message()
     client = Client()
     client.login(os.getenv("BLUESKY_HANDLE"), os.getenv("BLUESKY_PASSWORD"))
     client.send_post(text=message)
