@@ -26,13 +26,13 @@ jobs:
 
 
     - name: Run the disocrd live notification script
-      run: python Livediscord.py
+      run: python LivediscordTwitch.py
       env:
         TITLE: ${{ github.event.inputs.title }}
         LIVE_DISCORD_WEBHOOK_URL: ${{ secrets.LIVE_DISCORD_WEBHOOK_URL }}
 
     - name: Run the X and BluSky live notification script
-      run: python liveNotif.py
+      run: python liveNotifTwitch.py
       env:
         TITLE: ${{ github.event.inputs.title }}
         TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}

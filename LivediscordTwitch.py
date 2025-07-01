@@ -5,12 +5,11 @@ import requests
 
 
 def create_message():
-    yt_link = os.getenv("YOUTUBE_LINK")
     title = os.getenv("TITLE")
     message = f"""<@&824043811718168576> 🎮 Canadian Gamer is LIVE! Playing {title}
 
     📺 Twitch: https://twitch.tv/canadian_gamer23
-    📺 YouTube:{yt_link}
+
     """
 
     return message
