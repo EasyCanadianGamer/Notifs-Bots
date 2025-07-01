@@ -1,4 +1,4 @@
-name: Notify Live
+name: (twitch)Notify Live
 
 on:
   workflow_dispatch:  # Manual trigger
