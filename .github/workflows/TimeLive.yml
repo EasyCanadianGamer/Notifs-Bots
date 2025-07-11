@@ -1,0 +1,49 @@
+name: Time live
+
+on:
+  workflow_dispatch:  # Manual trigger
+    inputs:
+      game:
+        description: 'game'
+        required: true
+        type: string
+      time:
+        description: 'time'
+        required: true
+        type: string
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+
+    - name: Run the disocrd live notification script
+      run: python BeforeLiveDiscord.py
+      env:
+        GAME: ${{ github.event.inputs.game }}
+        TIME: ${{ github.event.inputs.time }}
+        LIVE_DISCORD_WEBHOOK_URL: ${{ secrets.LIVE_DISCORD_WEBHOOK_URL }}
+
+    - name: Run the X and BluSky live notification script
+      run: python BeforeLiveTwitch.py
+      env:
+        GAME: ${{ github.event.inputs.game }}
+        TIME: ${{ github.event.inputs.time }}
+        TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+        TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
+        TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+        TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
+        BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
+        BLUESKY_PASSWORD: ${{ secrets.BLUESKY_PASSWORD }}
